@@ -81,7 +81,7 @@ public class NumberGuesser implements ActionListener {
         input.setBounds(670, 200, 90, 40);
         input.setFont(fontTwo);
 
-        output.setBounds(580, 250, 270, 30);
+        output.setBounds(580, 250, 275, 30);
         output.setFont(fontThree);
         output.setEditable(false);
         output.setBorder(null);
@@ -126,15 +126,25 @@ public class NumberGuesser implements ActionListener {
 
         if(e.getSource() == guess) {
             try {
+            
                 temp = Integer.parseInt(input.getText());
-                if(temp == number) {
+                if (temp < 1 || temp > 100) {
+                    output.setText("That is not a number between 1 - 100!");
+                } 
+                else if (temp == number) {
                     output.setText("You guessed right, well done!");
                     numberOfTries++;
                     tries.setText("Number of tries: " + numberOfTries);
-                    numberOfHighscore = numberOfTries;
-                    highscore.setText("Your Highscore: " + numberOfHighscore);
+                    if(numberOfHighscore == 0) {
+                        numberOfHighscore = numberOfTries;
+                        highscore.setText("Your Highscore: " + numberOfHighscore);
+                    }
+                    if(numberOfTries < numberOfHighscore) {
+                        numberOfHighscore = numberOfTries;
+                        highscore.setText("Your Highscore: " + numberOfHighscore);
+                    }
                 }
-                if (temp != number) {
+                else if (temp != number) {
                     output.setText("You did not guess right, try again!");
                     numberOfTries++;
                     tries.setText("Number of tries: " + numberOfTries);
@@ -147,6 +157,7 @@ public class NumberGuesser implements ActionListener {
 
         if(e.getSource() == playAgain) {
             try {
+                input.setText(" ");
                 output.setText(" ");
                 number = randomNumber();
                 System.out.println(number);
