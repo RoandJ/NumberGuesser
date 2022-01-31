@@ -136,6 +136,7 @@ public class NumberGuesser implements ActionListener {
                     numberOfTries++;
                     tries.setText("Number of tries: " + numberOfTries);
                     giveUp.setEnabled(false);
+                    guess.setEnabled(false);
                     if(numberOfHighscore == 0) {
                         numberOfHighscore = numberOfTries;
                         highscore.setText("Your Highscore: " + numberOfHighscore);
@@ -145,7 +146,7 @@ public class NumberGuesser implements ActionListener {
                         highscore.setText("Your Highscore: " + numberOfHighscore);
                     }
                 }
-                else if (temp != number) {
+                else {
                     output.setText("You did not guess right, try again!");
                     numberOfTries++;
                     tries.setText("Number of tries: " + numberOfTries);
@@ -174,7 +175,7 @@ public class NumberGuesser implements ActionListener {
 
         if(e.getSource() == giveUp) {
             try {
-                output.setText("You gave up, the right number was: " + (int)number);
+                output.setText("You gave up, the right number was: " + number);
                 guess.setEnabled(false);
             }
             catch (Exception ex) {
@@ -183,7 +184,8 @@ public class NumberGuesser implements ActionListener {
         }
     }
     
-    public static void main(String args[]) {
+    public static void main(String[] args) {
+
         NumberGuesser guesser = new NumberGuesser();
     }
 }
